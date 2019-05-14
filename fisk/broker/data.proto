@@ -1,3 +1,33 @@
 syntax = "proto3";
 
 package fisk.broker;
+
+service Data {
+
+  rpc Candles (CandlesRequest) returns (CandlesResponse);
+
+}
+
+message CandlesRequest {
+  string instrument = 1
+  Duration interval = 2
+  Timestamp from_date = 3
+  Timestamp to_date = 4
+}
+
+message CandlesResponse {
+  string instrument = 1
+  Duration interval = 2
+  Timestamp from_date = 3
+  Timestamp to_date = 4
+  repeated Candlestick candles = 5;
+}
+
+message Candlestick {
+  Timestamp timestamp = 1;
+  int32 open = 2;
+  int32 high = 3;
+  int32 low = 4;
+  int32 close = 5;
+  int32 volume = 6;
+}
