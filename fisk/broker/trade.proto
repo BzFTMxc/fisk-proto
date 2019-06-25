@@ -1,3 +1,101 @@
 syntax = "proto3";
 
 package fisk.broker;
+
+
+service Trade {
+
+  rpc Orders (OrdersRequest) returns (OrdersResponse);
+
+  rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
+
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
+
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+
+}
+
+
+message OrdersRequest {
+  string order_id = 2;
+}
+
+message OrdersResponse {
+  repeated Order orders = 1;
+}
+
+message Order {
+  string order_id = 1;
+  string parent_order_id = 2;
+  string exchange_order_id = 3;
+  string placed_by = 4;
+  string variety = 5;
+  string status = 6;
+  string tradingsymbol = 7;
+  string exchange = 8;
+  string instrument_token = 9;
+  string transaction_type = 10;
+  string order_type = 11;
+  string product = 12;
+  string validity = 13;
+  float price = 14;
+  int32 quantity = 15;
+  float trigger_price = 16;
+  float average_price = 17;
+  int32 peding_quantity = 18;
+  int32 filled_quantity = 19;
+  int32 disclosed_quantity = 20;
+  string order_timestamp = 21;
+  string exchange_timestamp = 22;
+  string status_message = 23;
+}
+
+
+message PlaceOrderRequest {
+  string variety = 1;
+  string tradingsymbol = 2;
+  string exchange = 3;
+  string transaction_type = 4;
+  string order_type = 5;
+  int32 quantity = 6;
+  string product = 7;
+  string validity = 8;
+  float price = 9;
+  int32 stoploss = 10;
+  int32 squareoff = 11;
+  int32 trailing_stoploss = 12;
+}
+
+message PlaceOrderResponse {
+  string order_id = 1;
+}
+
+message UpdateOrderRequest {
+  string variety = 1;
+  string order_id = 2;
+  string tradingsymbol = 3;
+  string exchange = 4;
+  string transaction_type = 5;
+  string order_type = 6;
+  int32 quantity = 7;
+  string product = 8;
+  string validity = 9;
+  float price = 10;
+  int32 stoploss = 11;
+  int32 squareoff = 12;
+  int32 trailing_stoploss = 13;
+}
+
+message UpdateOrderResponse {
+  string order_id = 1;
+}
+
+message CancelOrderRequest {
+  string variety = 1;
+  string order_id = 2;
+  string parent_order_id = 3;
+}
+
+message CancelOrderResponse {
+  string order_id = 2;
+}

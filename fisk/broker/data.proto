@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package fisk.broker;
 
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
 service Data {
 
   rpc Candles (CandlesRequest) returns (CandlesResponse);
@@ -9,22 +13,22 @@ service Data {
 }
 
 message CandlesRequest {
-  string instrument = 1
-  Duration interval = 2
-  Timestamp from_date = 3
-  Timestamp to_date = 4
+  string instrument_token = 1;
+  google.protobuf.Duration interval = 2;
+  google.protobuf.Timestamp from_date = 3;
+  google.protobuf.Timestamp to_date = 4;
 }
 
 message CandlesResponse {
-  string instrument = 1
-  Duration interval = 2
-  Timestamp from_date = 3
-  Timestamp to_date = 4
+  string instrument_token = 1;
+  google.protobuf.Duration interval = 2;
+  google.protobuf.Timestamp from_date = 3;
+  google.protobuf.Timestamp to_date = 4;
   repeated Candlestick candles = 5;
 }
 
 message Candlestick {
-  Timestamp timestamp = 1;
+  google.protobuf.Timestamp timestamp = 1;
   int32 open = 2;
   int32 high = 3;
   int32 low = 4;
